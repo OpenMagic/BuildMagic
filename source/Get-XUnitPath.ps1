@@ -1,8 +1,12 @@
 Function Get-XUnitPath {
-    param(
+    param (
         [ValidateNotNullOrEmpty()]
         [string]
-        $PackagesDirectory = $(Get-PackagesDirectory)
+        $SolutionDirectory = $(Get-SolutionDirectory),
+
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $PackagesDirectory = $(Get-PackagesDirectory $SolutionDirectory)
     )
     $xunitDirectories = Get-ChildItem -Path $PackagesDirectory -Directory -Filter "xunit.runner.console*"
     

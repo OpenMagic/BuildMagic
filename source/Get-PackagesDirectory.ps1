@@ -1,4 +1,8 @@
 Function Get-PackagesDirectory {
-    $solutionDirectory = Get-SolutionDirectory
-    return [System.IO.Path]::Combine($solutionDirectory, "packages")
+    param (
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $SolutionDirectory = $(Get-SolutionDirectory)
+    )
+    return [System.IO.Path]::Combine($SolutionDirectory, "packages")
 }

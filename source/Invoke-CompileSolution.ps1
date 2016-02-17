@@ -1,16 +1,19 @@
 Function Invoke-CompileSolution {    
     param(
-        [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $Configuration,
+        $SolutionDirectory = $(Get-SolutionDirectory),
 
-        [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $Verbosity
+        $Configuration = "Release",
+
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $Verbosity = "minimal"
     )
     Invoke-MSBuild `
+        -SolutionDirectory $SolutionDirectory `
         -Target "ReBuild" `
         -Configuration $Configuration `
         -Verbosity $Verbosity `

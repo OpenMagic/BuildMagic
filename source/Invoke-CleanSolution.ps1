@@ -1,20 +1,23 @@
 Function Invoke-CleanSolution {
     param(
-        [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $Configuration,
+        $SolutionDirectory = $(Get-SolutionDirectory),
+        
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $Configuration = "Release",
 
-        [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $Verbosity
+        $Verbosity = "minimal"
     )
     Invoke-MSBuild `
+        -SolutionDirectory $SolutionDirectory `
         -Target "Clean" `
         -Configuration $Configuration `
         -Verbosity $Verbosity `
         -StartingMessage "Cleaning solution..." `
         -ErrorMessage "Error while cleaning solution '{SolutionFile}'." `
-        -SuccessfulMessage "Successfully cleaned solution '{SolutionFile}'." `
+        -SuccessfulMessage "Successfully cleaned solution '{SolutionFile}'."
 }

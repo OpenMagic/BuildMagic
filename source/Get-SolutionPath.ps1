@@ -1,9 +1,12 @@
 # Searches for the solution file in repository's root directory
 Function Get-SolutionPath {
-        
-    $solutionDirectory = Get-SolutionDirectory
-
-    $files = Get-ChildItem -Path $solutionDirectory -File -Filter "*.sln"
+    param (
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $SolutionDirectory = $(Get-SolutionDirectory)
+    )
+    
+    $files = Get-ChildItem -Path $SolutionDirectory -File -Filter "*.sln"
 
     If ($files.Count -eq 0)
     {

@@ -1,16 +1,25 @@
 # Ensure's NuGet.exe is in .\packages directory
 Function Install-NuGet
 {
-    $packagesDirectory = Get-PackagesDirectory
+    param (
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $SolutionDirectory = $(Get-SolutionDirectory),
+
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $PackagesDirectory = $(Get-PackagesDirectory)
+    )
+
     $nuGetPath = Get-NuGetPath
     $nuGetUrl = "http://nuget.org/NuGet.exe"
 
     Write-Host "Installing NuGet.exe..." -ForegroundColor Yellow
 
-    if (-Not (Test-Path $packagesDirectory)) {
-        Write-Host "Creating directory '$packagesDirectory'..."
-        New-Item -Path $packagesDirectory -Type Directory | Out-Null
-        Write-Host "Successfully created directory '$packagesDirectory'..."
+    if (-Not (Test-Path $PackagesDirectory)) {
+        Write-Host "Creating directory '$PackagesDirectory'..."
+        New-Item -Path $PackagesDirectory -Type Directory | Out-Null
+        Write-Host "Successfully created directory '$PackagesDirectory'..."
     }
 
     if (Test-Path $nuGetPath) {

@@ -1,13 +1,24 @@
 Function Install-NuGetPackages {    
+    param (
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $SolutionDirectory = $(Get-SolutionDirectory),
+
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $PackagesDirectory = $(Get-PackagesDirectory $SolutionDirectory),
+
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $NuGetPath = $(Get-NuGetPath $PackagesDirectory)
+    )
     Write-Host "Installing NuGet packages..." -ForegroundColor Yellow
 
     Install-NuGet
     
-    $solutionPath = Get-SolutionPath
-    $nuGetPath = Get-NuGetPath
-    $packagesDirectory = Get-PackagesDirectory
+    $solutionPath = Get-SolutionPath $SolutionDirectory
     
-    &$nuGetPath restore $solutionPath -PackagesDirectory $packagesDirectory
+    &$NuGetPath restore $solutionPath -PackagesDirectory $PackagesDirectory
     
     If ($LASTEXITCODE -ne 0)
     {

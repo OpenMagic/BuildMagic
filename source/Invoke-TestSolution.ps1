@@ -2,15 +2,23 @@ Function Invoke-TestSolution {
     param(
         [ValidateNotNullOrEmpty()]
         [string]
+        $SolutionDirectory = $(Get-SolutionDirectory),
+
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $PackagesDirectory = $(Get-PackagesDirectory $SolutionDirectory),
+
+        [ValidateNotNullOrEmpty()]
+        [string]
         $Configuration,
 
         [ValidateNotNullOrEmpty()]
         [string[]]
-        $TestAssemblies = $(Get-TestAssemblies -Configuration $Configuration),
+        $TestAssemblies = $(Get-TestAssemblies -SolutionDirectory $SolutionDirectory -Configuration $Configuration),
 
         [ValidateNotNullOrEmpty()]
         [string]
-        $XUnitPath = $(Get-XUnitPath)
+        $XUnitPath = $(Get-XUnitPath -PackagesDirectory $PackagesDirectory)
     )    
     Write-Host "Running tests..." -ForegroundColor Yellow
 
@@ -21,21 +29,3 @@ Function Invoke-TestSolution {
 
     Write-Host "Successfully ran tests." -ForegroundColor Green
 }
-
-# todo: Uncomment following lines to debug this function
-# $ErrorActionPreference = "Stop"
-# $WarningPreference = "SilentlyContinue"
-# $VerbosePreference = "SilentlyContinue"
-# 
-# Set-Location $PSScriptRoot\..\..\..\
-# . $PSScriptRoot\Get-PackagesDirectory
-# . $PSScriptRoot\Get-ProjectName
-# . $PSScriptRoot\Get-ProjectPath
-# . $PSScriptRoot\Get-SolutionDirectory
-# . $PSScriptRoot\Get-TestAssemblies
-# . $PSScriptRoot\Get-TestAssembly
-# . $PSScriptRoot\Get-TestsDirectory
-# . $PSScriptRoot\Get-XUnitPath
-# . $PSScriptRoot\psake\Exec
-# 
-# Invoke-TestSolution -Configuration Release

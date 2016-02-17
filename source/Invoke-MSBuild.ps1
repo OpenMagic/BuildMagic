@@ -1,38 +1,37 @@
 Function Invoke-MSBuild {
     param (
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $SolutionDirectory = $(Get-SolutionDirectory),
+
         [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [string]
         $Target,
         
-        [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $Configuration,
+        $StartingMessage = "Running MSBuild...",
         
-        [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $Verbosity,
+        $ErrorMessage = "Error while building solution '{SolutionFile}'.",
+        
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $SuccessfulMessage = "Successfully built solution '{SolutionFile}'.",        
 
-        [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $StartingMessage,
+        $Configuration = "Release",
         
-        [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $ErrorMessage,
-        
-        [Parameter(Mandatory=$true)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $SuccessfulMessage        
+        $Verbosity = "minimal"
     )
     Write-Host $StartingMessage -ForegroundColor Yellow
 
-    $solutionPath = Get-SolutionPath
+    $solutionPath = Get-SolutionPath $SolutionDirectory
     $solutionFile = [System.IO.Path]::GetFileNameWithoutExtension($solutionPath)
     $cmd = { msbuild.exe $solutionPath /target:$Target /property:Configuration=$Configuration /verbosity:$Verbosity /nologo }
     $errorMessage = $ErrorMessage.Replace("{SolutionFile}", $solutionFile)
