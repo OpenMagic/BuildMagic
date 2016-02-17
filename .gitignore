@@ -1,0 +1,9 @@
+artifacts/
+bin/
+node_modules/
+obj/
+packages/
+
+*.feature.cs
+*.suo
+*.user

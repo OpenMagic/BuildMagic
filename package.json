@@ -1,0 +1,20 @@
+{
+  "name": "build-magic",
+  "version": "1.0.0",
+  "description": "Covention based Powershell system to build Visual Studio solutions",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OpenMagic/BuildMagic.git"
+  },
+  "author": {
+    "name": "Tim Murphy",
+    "email": "tim@26tp.com",
+    "url": "https://timmurphy.it"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OpenMagic/BuildMagic/issues"
+  },
+  "homepage": "https://github.com/OpenMagic/BuildMagic#readme",
+  "private": true
+}
