@@ -1,6 +1,6 @@
 {
   "name": "build-magic",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Covention based Powershell system to build Visual Studio solutions",
   "repository": {
     "type": "git",
