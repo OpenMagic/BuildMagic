@@ -6,7 +6,7 @@ Function Get-NuGetPath {
 
         [ValidateNotNullOrEmpty()]
         [string]
-        $PackagesDirectory = $(Get-PackagesDirectory $SolutionDirectoy)
+        $PackagesDirectory = $(Get-PackagesDirectory -SolutionDirectory $SolutionDirectory)
     )
     return [System.IO.Path]::Combine($packagesDirectory, "NuGet.exe")
 }

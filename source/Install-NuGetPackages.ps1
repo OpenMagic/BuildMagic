@@ -6,11 +6,11 @@ Function Install-NuGetPackages {
 
         [ValidateNotNullOrEmpty()]
         [string]
-        $PackagesDirectory = $(Get-PackagesDirectory $SolutionDirectory),
+        $PackagesDirectory = $(Get-PackagesDirectory -SolutionDirectory $SolutionDirectory),
 
         [ValidateNotNullOrEmpty()]
         [string]
-        $NuGetPath = $(Get-NuGetPath $PackagesDirectory)
+        $NuGetPath = $(Get-NuGetPath -PackagesDirectory $PackagesDirectory)
     )
     Write-Host "Installing NuGet packages..." -ForegroundColor Yellow
 
