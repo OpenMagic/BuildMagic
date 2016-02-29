@@ -10,7 +10,7 @@ Function Invoke-TestSolution {
 
         [ValidateNotNullOrEmpty()]
         [string]
-        $Configuration,
+        $Configuration = "Release",
 
         [ValidateNotNullOrEmpty()]
         [string[]]
