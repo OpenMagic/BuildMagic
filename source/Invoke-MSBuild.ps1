@@ -36,7 +36,6 @@ Function Invoke-MSBuild {
     $cmd = { msbuild.exe $solutionPath /target:$Target /property:Configuration=$Configuration /verbosity:$Verbosity /nologo }
     $errorMessage = $ErrorMessage.Replace("{SolutionFile}", $solutionFile)
 
-    Set-MSBuildEnvironment
     Exec $cmd $errorMessage
     
     Write-Host $SuccessfulMessage.Replace("{SolutionFile}", $solutionFile) -ForegroundColor Green    

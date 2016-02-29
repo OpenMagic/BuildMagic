@@ -1,1 +1,0 @@
-The files in this directory have been extracted from [psake](https://github.com/psake/psake).
